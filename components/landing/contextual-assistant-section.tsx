@@ -1,30 +1,32 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 export function ContextualAssistantSection() {
+  const t = useTranslations()
+  
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <div className="flex items-center gap-4 mb-12">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-200 text-sm text-gray-600">
-            CONTEXTUAL ASSISTANT
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300">
+            {t('landing.contextualAssistant.label')}
           </span>
-          <div className="flex-1 h-px bg-gray-200" />
+          <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight text-balance">
-              See conversations that connect themselves.
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-tight text-balance">
+              {t('landing.contextualAssistant.title')}
             </h2>
-            <p className="text-gray-600 leading-relaxed">
-              Lyo connects what belongs together. Contract sent on WhatsApp? Lyo will surface the email requesting
-              it. Meeting details scattered across Slack and email?
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+              {t('landing.contextualAssistant.description1')}
             </p>
-            <p className="text-gray-600 leading-relaxed">Now they're in one place, before you even ask for it.</p>
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{t('landing.contextualAssistant.description2')}</p>
           </div>
 
           {/* Right content - Mockup */}

@@ -1,8 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 export function AboutSection() {
+  const t = useTranslations()
+  
   return (
     <section id="about" className="py-24 bg-[#0f0f0f] relative overflow-hidden">
       {/* Grid background */}
@@ -24,12 +27,10 @@ export function AboutSection() {
           className="space-y-6"
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight text-balance">
-            Lyo brings together all of your conversations, which uses AI to understand your goals and lets you focus
-            on the most important messages and contacts.
+            {t('landing.about.title')}
           </h2>
           <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Whether you're circling back over email, digging for opportunities on LinkedIn, or buried under messages on
-            Slack, business communications happens on too many platforms.
+            {t('landing.about.description')}
           </p>
         </motion.div>
 
@@ -37,7 +38,7 @@ export function AboutSection() {
         <div className="flex items-center justify-center gap-4 mt-16">
           <div className="flex-1 max-w-xs h-px bg-gray-700" />
           <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-700 text-sm text-gray-400">
-            FEATURES
+            {t('landing.about.featuresLabel')}
           </span>
           <div className="flex-1 max-w-xs h-px bg-gray-700" />
         </div>

@@ -1,16 +1,19 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 export function UniversalSearchSection() {
+  const t = useTranslations()
+  
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <div className="flex items-center justify-end gap-4 mb-12">
-          <div className="flex-1 h-px bg-gray-200" />
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-200 text-sm text-gray-600 bg-white">
-            UNIVERSAL SEARCH
+          <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900">
+            {t('landing.universalSearch.label')}
           </span>
         </div>
 
@@ -59,15 +62,14 @@ export function UniversalSearchSection() {
 
           {/* Right content */}
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight text-balance">
-              Search across all your conversations.
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-tight text-balance">
+              {t('landing.universalSearch.title')}
             </h2>
-            <p className="text-gray-600 leading-relaxed">
-              Find anything you've ever sent or received without knowing the exact words that were used.
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+              {t('landing.universalSearch.description1')}
             </p>
-            <p className="text-gray-600 leading-relaxed">
-              Instead of crawling through multiple emails and messaging platforms, just ask Kinso's universal search
-              bar.
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+              {t('landing.universalSearch.description2')}
             </p>
           </div>
         </div>

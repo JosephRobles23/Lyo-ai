@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function MorningBriefingSection() {
+  const t = useTranslations()
+  
   return (
     <section className="py-24 bg-[#0f0f0f] relative overflow-hidden">
       {/* Grid background */}
@@ -21,14 +24,12 @@ export function MorningBriefingSection() {
           {/* Left content */}
           <div className="space-y-6">
             <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
-              <span className="text-white">Start every day knowing</span>
+              <span className="text-white">{t('landing.morningBriefing.title')}</span>
               <br />
-              <span className="text-amber-500">what matters.</span>
+              <span className="text-amber-500">{t('landing.morningBriefing.titleHighlight')}</span>
             </h2>
             <p className="text-gray-400 leading-relaxed max-w-lg">
-              Kinso serves you a morning briefing that summarises crucial messages and action items. Whether it's the
-              urgent client request or time-sensitive approval, you'll see it in order of what needs your attention
-              first.
+              {t('landing.morningBriefing.description')}
             </p>
           </div>
 
@@ -50,24 +51,24 @@ export function MorningBriefingSection() {
               <div className="p-8">
                 <div className="space-y-4">
                   <h3 className="text-2xl">
-                    <span className="text-white">Good Morning, </span>
+                    <span className="text-white">{t('landing.morningBriefing.goodMorning')} </span>
                     <span className="text-gray-500">Sarah.</span>
                   </h3>
                   <p className="text-gray-400">
-                    You've got <span className="text-white">4 new</span> and{" "}
-                    <span className="text-gray-500">5 active</span>
+                    {t('landing.morningBriefing.newConversations')} <span className="text-white">4 {t('landing.morningBriefing.new')}</span> {t('landing.morningBriefing.and')}{" "}
+                    <span className="text-gray-500">5 {t('landing.morningBriefing.active')}</span>
                     <br />
-                    conversations.
+                    {t('landing.morningBriefing.conversations')}
                   </p>
 
                   <button className="inline-flex items-center gap-2 bg-white text-black rounded-full px-4 py-2 text-sm font-medium mt-4">
-                    Today's briefing <ChevronRight className="w-4 h-4" />
+                    {t('landing.morningBriefing.todaysBriefing')} <ChevronRight className="w-4 h-4" />
                   </button>
 
                   <div className="flex items-center gap-3 mt-6 bg-[#252525] rounded-full px-4 py-2">
                     <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 to-teal-400" />
                     <span className="text-sm text-gray-400">
-                      Start typing to ask <span className="text-gray-500">or search Kinso</span>
+                      {t('landing.morningBriefing.searchPlaceholder')}
                     </span>
                   </div>
                 </div>

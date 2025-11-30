@@ -26,9 +26,92 @@
   "landing": {
     "hero": {
       "title": "Una bandeja, todas las conversaciones",
-      "subtitle": "Lyo reúne todos tus mensajes, correos y contactos. Aprende inteligentemente tus objetivos, entiende lo que más importa y redacta respuestas que suenan como tú.",
-      "cta": "Comenzar",
-      "secondaryCta": "Saber Más"
+      "subtitle": "Kinso reúne todos tus mensajes, correos y contactos. Aprende inteligentemente tus objetivos, entiende lo que más importa y redacta respuestas que suenan como tú.",
+      "waitlist": "Únete a",
+      "waitlistOthers": "personas en la lista de espera.",
+      "joinNow": "Únete ahora"
+    },
+    "integrations": {
+      "title": "INTEGRACIONES"
+    },
+    "draftResponse": {
+      "label": "RESPUESTA AUTOMÁTICA",
+      "title": "Responde más rápido con respuestas redactadas automáticamente.",
+      "description1": "Al aprender cómo te comunicas con diferentes personas en diferentes plataformas, redacta respuestas que coinciden con tu voz y tono.",
+      "description2": "Cada respuesta se elabora con el contexto de tus discusiones y reuniones recientes."
+    },
+    "universalSearch": {
+      "label": "BÚSQUEDA UNIVERSAL",
+      "title": "Busca en todas tus conversaciones.",
+      "description1": "Encuentra cualquier cosa que hayas enviado o recibido sin conocer las palabras exactas que se usaron.",
+      "description2": "En lugar de buscar en múltiples correos y plataformas de mensajería, simplemente pregunta en la barra de búsqueda universal de Kinso."
+    },
+    "contextualAssistant": {
+      "label": "ASISTENTE CONTEXTUAL",
+      "title": "Ve conversaciones que se conectan entre sí.",
+      "description1": "Lyo conecta lo que pertenece junto. ¿Contrato enviado por WhatsApp? Lyo mostrará el correo que lo solicitó. ¿Detalles de reunión dispersos en Slack y correo?",
+      "description2": "Ahora están en un solo lugar, antes de que lo pidas."
+    },
+    "about": {
+      "title": "Lyo reúne todas tus conversaciones, usa IA para entender tus objetivos y te permite enfocarte en los mensajes y contactos más importantes.",
+      "description": "Ya sea que estés respondiendo correos, buscando oportunidades en LinkedIn o enterrado bajo mensajes en Slack, las comunicaciones empresariales ocurren en demasiadas plataformas.",
+      "featuresLabel": "CARACTERÍSTICAS"
+    },
+    "morningBriefing": {
+      "title": "Comienza cada día sabiendo",
+      "titleHighlight": "lo que importa.",
+      "description": "Kinso te sirve un resumen matutino que resume mensajes cruciales y elementos de acción. Ya sea la solicitud urgente del cliente o la aprobación urgente, lo verás en orden de lo que necesita tu atención primero.",
+      "goodMorning": "Buenos Días,",
+      "newConversations": "Tienes",
+      "new": "nuevas",
+      "and": "y",
+      "active": "activas",
+      "conversations": "conversaciones.",
+      "todaysBriefing": "Resumen de hoy",
+      "searchPlaceholder": "Comienza a escribir para preguntar o buscar en Kinso"
+    },
+    "faq": {
+      "label": "PREGUNTAS FRECUENTES",
+      "title": "Preguntas Frecuentes",
+      "description": "Todo lo que necesitas saber sobre el uso de Lyo, desde la configuración hasta la seguridad. ¿Aún tienes curiosidad? Envíanos un mensaje y te responderemos de inmediato.",
+      "questions": {
+        "q1": {
+          "question": "¿En qué se diferencia Lyo de una bandeja de entrada normal?",
+          "answer": "Lyo unifica todas tus plataformas de comunicación en una bandeja de entrada inteligente. A diferencia de los clientes de correo tradicionales, utiliza IA para comprender el contexto, priorizar mensajes y redactar respuestas que coincidan con tu voz."
+        },
+        "q2": {
+          "question": "¿Cómo funcionan las respuestas redactadas automáticamente?",
+          "answer": "Lyo aprende cómo te comunicas con diferentes personas y en diferentes plataformas. Cuando recibes un mensaje, redacta automáticamente una respuesta que coincide con tu voz y tono, incorporando el contexto de tus discusiones recientes."
+        },
+        "q3": {
+          "question": "¿Puedes seguir enviando mensajes fuera de Lyo en cuentas conectadas?",
+          "answer": "¡Sí! Lyo funciona junto con tus aplicaciones existentes. Puedes seguir usando Gmail, Slack, WhatsApp y otras plataformas normalmente. Lyo simplemente proporciona una vista unificada y asistencia de IA."
+        },
+        "q4": {
+          "question": "¿Cómo aprende Lyo mis objetivos y prioridades?",
+          "answer": "Lyo analiza tus patrones de comunicación, tiempos de respuesta y frecuencia de interacción para comprender lo que más te importa. Con el tiempo, mejora en mostrar mensajes y tareas importantes."
+        },
+        "q5": {
+          "question": "¿Mis datos son privados y seguros?",
+          "answer": "Absolutamente. Lyo utiliza cifrado de nivel empresarial y nunca comparte tus datos con terceros. Tus comunicaciones permanecen privadas y tienes control total sobre lo que Lyo puede acceder."
+        },
+        "q6": {
+          "question": "¿Qué sucede cuando me uno a la lista de espera?",
+          "answer": "Recibirás acceso anticipado a Lyo a medida que lo implementemos para nuevos usuarios. Te enviaremos actualizaciones sobre nuestro progreso y te avisaremos cuando sea tu turno de experimentar la bandeja de entrada unificada."
+        }
+      }
+    },
+    "footer": {
+      "description": "Una bandeja de entrada inteligente para todos tus mensajes, correos y contactos.",
+      "product": "Producto",
+      "legal": "Legal",
+      "about": "Acerca de",
+      "termsOfUse": "Términos de Uso",
+      "privacyPolicy": "Política de Privacidad",
+      "meetTheTeam": "Conoce al Equipo",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "youtube": "Youtube"
     }
   },
   "dashboard": {
