@@ -1,0 +1,43 @@
+{
+  "common": {
+    "appName": "Lyo",
+    "tagline": "One inbox, every conversation",
+    "backToHome": "Back to home",
+    "copyright": "© 2025 Lyo. All rights reserved."
+  },
+  "nav": {
+    "about": "About",
+    "features": "Features",
+    "faqs": "FAQs",
+    "login": "Login",
+    "getStarted": "Get Started"
+  },
+  "login": {
+    "title": "Welcome to Lyo",
+    "subtitle": "One inbox for every conversation",
+    "continueWithGoogle": "Continue with Google",
+    "signingIn": "Signing in...",
+    "secureLogin": "Secure login",
+    "agreement": "By continuing, you agree to our",
+    "termsOfUse": "Terms of Use",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "landing": {
+    "hero": {
+      "title": "One inbox, every conversation",
+      "subtitle": "Lyo brings together all your messages, emails, and contacts. It intelligently learns your goals, understands what matters most, and drafts replies that sound like you.",
+      "cta": "Get Started",
+      "secondaryCta": "Learn More"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "inbox": "Inbox",
+    "contacts": "Contacts",
+    "calendar": "Calendar",
+    "agent": "Agent",
+    "integrations": "Integrations",
+    "settings": "Settings"
+  }
+}

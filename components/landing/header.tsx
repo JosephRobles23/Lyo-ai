@@ -1,13 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { Menu, X, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { KinsoLogo } from "@/components/kinso-logo"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useTranslations } from "next-intl"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const t = useTranslations()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
@@ -23,25 +26,26 @@ export function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
               <Link href="#about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-                About
+                {t('nav.about')}
               </Link>
               <Link href="#features" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-                Features
+                {t('nav.features')}
               </Link>
               <Link href="#faqs" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-                FAQs
+                {t('nav.faqs')}
               </Link>
             </nav>
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
             <Button variant="ghost" className="text-sm" asChild>
-              <Link href="/login">Login</Link>
+              <Link href="/login">{t('nav.login')}</Link>
             </Button>
             <Button className="bg-gray-900 text-white hover:bg-gray-800 rounded-full px-5" asChild>
               <Link href="/login">
-                Get Started <ChevronRight className="ml-1 h-4 w-4" />
+                {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -58,21 +62,24 @@ export function Header() {
         <div className="md:hidden bg-white border-t border-gray-100">
           <nav className="flex flex-col p-4 gap-4">
             <Link href="#about" className="text-sm text-gray-600 hover:text-gray-900">
-              About
+              {t('nav.about')}
             </Link>
             <Link href="#features" className="text-sm text-gray-600 hover:text-gray-900">
-              Features
+              {t('nav.features')}
             </Link>
             <Link href="#faqs" className="text-sm text-gray-600 hover:text-gray-900">
-              FAQs
+              {t('nav.faqs')}
             </Link>
             <div className="flex flex-col gap-2 pt-4 border-t border-gray-100">
+              <div className="flex justify-center mb-2">
+                <LanguageSwitcher />
+              </div>
               <Button variant="ghost" className="w-full justify-center" asChild>
-                <Link href="/login">Login</Link>
+                <Link href="/login">{t('nav.login')}</Link>
               </Button>
               <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 rounded-full" asChild>
                 <Link href="/login">
-                  Get Started <ChevronRight className="ml-1 h-4 w-4" />
+                  {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
                 </Link>
               </Button>
             </div>

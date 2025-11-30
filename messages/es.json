@@ -1,0 +1,43 @@
+{
+  "common": {
+    "appName": "Lyo",
+    "tagline": "Una bandeja, todas las conversaciones",
+    "backToHome": "Volver al inicio",
+    "copyright": "© 2025 Lyo. Todos los derechos reservados."
+  },
+  "nav": {
+    "about": "Acerca de",
+    "features": "Características",
+    "faqs": "Preguntas Frecuentes",
+    "login": "Iniciar Sesión",
+    "getStarted": "Comenzar"
+  },
+  "login": {
+    "title": "Bienvenido a Lyo",
+    "subtitle": "Una bandeja para todas las conversaciones",
+    "continueWithGoogle": "Continuar con Google",
+    "signingIn": "Iniciando sesión...",
+    "secureLogin": "Inicio seguro",
+    "agreement": "Al continuar, aceptas nuestros",
+    "termsOfUse": "Términos de Uso",
+    "and": "y",
+    "privacyPolicy": "Política de Privacidad"
+  },
+  "landing": {
+    "hero": {
+      "title": "Una bandeja, todas las conversaciones",
+      "subtitle": "Lyo reúne todos tus mensajes, correos y contactos. Aprende inteligentemente tus objetivos, entiende lo que más importa y redacta respuestas que suenan como tú.",
+      "cta": "Comenzar",
+      "secondaryCta": "Saber Más"
+    }
+  },
+  "dashboard": {
+    "title": "Panel",
+    "inbox": "Bandeja de Entrada",
+    "contacts": "Contactos",
+    "calendar": "Calendario",
+    "agent": "Agente",
+    "integrations": "Integraciones",
+    "settings": "Configuración"
+  }
+}
