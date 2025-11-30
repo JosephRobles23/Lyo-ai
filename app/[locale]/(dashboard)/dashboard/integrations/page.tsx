@@ -27,8 +27,8 @@ const integrations = [
     icon: MessageCircle,
     color: "text-green-400",
     bgColor: "bg-green-400/10",
-    connected: true,
-    status: "Connected as +1 (555) 000-1234",
+    connected: false,
+    status: "Not connected",
   },
   {
     id: "gmail",
@@ -37,8 +37,8 @@ const integrations = [
     icon: Mail,
     color: "text-red-400",
     bgColor: "bg-red-400/10",
-    connected: true,
-    status: "Connected as john@company.com",
+    connected: false,
+    status: "Not connected",
   },
   {
     id: "linkedin",
@@ -47,8 +47,8 @@ const integrations = [
     icon: Linkedin,
     color: "text-blue-400",
     bgColor: "bg-blue-400/10",
-    connected: true,
-    status: "Connected as John Doe",
+    connected: false,
+    status: "Not connected",
   },
   {
     id: "instagram",
@@ -67,8 +67,8 @@ const integrations = [
     icon: CalendarDays,
     color: "text-yellow-400",
     bgColor: "bg-yellow-400/10",
-    connected: true,
-    status: "Connected to primary calendar",
+    connected: false,
+    status: "Not connected",
   },
   {
     id: "supabase",
@@ -77,8 +77,8 @@ const integrations = [
     icon: Database,
     color: "text-emerald-400",
     bgColor: "bg-emerald-400/10",
-    connected: true,
-    status: "Connected to production instance",
+    connected: false,
+    status: "Not connected",
   },
   {
     id: "huggingface",
@@ -87,8 +87,8 @@ const integrations = [
     icon: Brain,
     color: "text-yellow-500",
     bgColor: "bg-yellow-500/10",
-    connected: true,
-    status: "Using DeepSeek model",
+    connected: false,
+    status: "Not connected",
   },
 ]
 
