@@ -111,7 +111,7 @@ export default function ContactsPage() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <header className="flex items-center justify-between border-b border-border px-6 py-4">
+      <header className="flex items-center justify-between border-b border-border px-6 py-2">
         <div>
           <h1 className="text-lg font-semibold">Contacts</h1>
           <p className="text-sm text-muted-foreground">{contacts.length} total contacts</p>
@@ -160,12 +160,12 @@ export default function ContactsPage() {
       {/* Contacts List/Grid */}
       <div className="flex-1 overflow-y-auto p-6">
         {viewMode === "list" ? (
-          <div className="space-y-2">
+          <div className="space-y-2 gap-8">
             {filteredContacts.map((contact) => (
               <Link key={contact.id} href={`/dashboard/contacts/${contact.id}`}>
-                <Card className="bg-card/50 hover:bg-card transition-colors cursor-pointer">
-                  <CardContent className="flex items-center gap-4 p-4">
-                    <Avatar className="h-12 w-12">
+                <Card className="bg-card/50 hover:bg-card transition-colors cursor-pointer mb-3">
+                  <CardContent className="flex items-center gap-x-6 p-3 mx-2">
+                    <Avatar className="h-12 w-12 shrink-0">
                       <AvatarImage src={contact.avatar || "/placeholder.svg"} />
                       <AvatarFallback>
                         {contact.name
@@ -175,9 +175,9 @@ export default function ContactsPage() {
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-x-3">
                         <span className="font-medium">{contact.name}</span>
-                        <div className="flex gap-1">
+                        <div className="flex gap-x-4">
                           {contact.channels.map((channel) => {
                             const { icon: Icon, color } = channelIcons[channel as keyof typeof channelIcons]
                             return <Icon key={channel} className={`h-3.5 w-3.5 ${color}`} />
@@ -188,15 +188,15 @@ export default function ContactsPage() {
                         {contact.role} at {contact.company}
                       </p>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex gap-1">
+                    <div className="flex items-center gap-x-4 shrink-0">
+                      <div className="flex gap-x-2">
                         {contact.tags.slice(0, 2).map((tag) => (
                           <Badge key={tag} variant="secondary" className="text-xs">
                             {tag}
                           </Badge>
                         ))}
                       </div>
-                      <span className="text-xs text-muted-foreground whitespace-nowrap">{contact.lastInteraction}</span>
+                      <span className="text-xs text-muted-foreground whitespace-nowrap min-w-[70px] text-right">{contact.lastInteraction}</span>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost" size="icon" className="h-8 w-8" onClick={(e) => e.preventDefault()}>

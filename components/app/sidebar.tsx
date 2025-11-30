@@ -31,6 +31,7 @@ import {
 
 interface AppSidebarProps {
   onCommandOpen: () => void
+  onNavigate?: () => void
 }
 
 const navigation = [
@@ -43,7 +44,7 @@ const navigation = [
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ]
 
-export function AppSidebar({ onCommandOpen }: AppSidebarProps) {
+export function AppSidebar({ onCommandOpen, onNavigate }: AppSidebarProps) {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
 
@@ -101,6 +102,7 @@ export function AppSidebar({ onCommandOpen }: AppSidebarProps) {
             <Link
               key={item.name}
               href={item.href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                 isActive

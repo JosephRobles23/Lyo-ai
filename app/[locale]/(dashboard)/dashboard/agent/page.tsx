@@ -1,324 +1,603 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { MessageSquare, Zap, Brain, Settings, Code, History, Play, Pause, RefreshCw } from "lucide-react"
+import {
+  MessageBranch,
+  MessageBranchContent,
+  MessageBranchNext,
+  MessageBranchPage,
+  MessageBranchPrevious,
+  MessageBranchSelector,
+} from "@/components/ai-elements/message";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import { Message, MessageContent } from "@/components/ai-elements/message";
+import {
+  PromptInput,
+  PromptInputActionAddAttachments,
+  PromptInputActionMenu,
+  PromptInputActionMenuContent,
+  PromptInputActionMenuTrigger,
+  PromptInputAttachment,
+  PromptInputAttachments,
+  PromptInputBody,
+  PromptInputButton,
+  PromptInputFooter,
+  PromptInputHeader,
+  type PromptInputMessage,
+  PromptInputSubmit,
+  PromptInputTextarea,
+  PromptInputTools,
+} from "@/components/ai-elements/prompt-input";
+import {
+  ModelSelector,
+  ModelSelectorContent,
+  ModelSelectorEmpty,
+  ModelSelectorGroup,
+  ModelSelectorInput,
+  ModelSelectorItem,
+  ModelSelectorList,
+  ModelSelectorLogo,
+  ModelSelectorLogoGroup,
+  ModelSelectorName,
+  ModelSelectorTrigger,
+} from "@/components/ai-elements/model-selector";
+import {
+  Reasoning,
+  ReasoningContent,
+  ReasoningTrigger,
+} from "@/components/ai-elements/reasoning";
+import { MessageResponse } from "@/components/ai-elements/message";
+import {
+  Source,
+  Sources,
+  SourcesContent,
+  SourcesTrigger,
+} from "@/components/ai-elements/sources";
+import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion";
+import type { ToolUIPart } from "ai";
+import { CheckIcon, GlobeIcon, MicIcon } from "lucide-react";
+import { nanoid } from "nanoid";
+import { useCallback, useState } from "react";
+import { toast } from "sonner";
+
+type MessageType = {
+  key: string;
+  from: "user" | "assistant";
+  sources?: { href: string; title: string }[];
+  versions: {
+    id: string;
+    content: string;
+  }[];
+  reasoning?: {
+    content: string;
+    duration: number;
+  };
+  tools?: {
+    name: string;
+    description: string;
+    status: ToolUIPart["state"];
+    parameters: Record<string, unknown>;
+    result: string | undefined;
+    error: string | undefined;
+  }[];
+};
+
+const initialMessages: MessageType[] = [
+  {
+    key: nanoid(),
+    from: "user",
+    versions: [
+      {
+        id: nanoid(),
+        content: "Can you explain how to use React hooks effectively?",
+      },
+    ],
+  },
+  {
+    key: nanoid(),
+    from: "assistant",
+    sources: [
+      {
+        href: "https://react.dev/reference/react",
+        title: "React Documentation",
+      },
+      {
+        href: "https://react.dev/reference/react-dom",
+        title: "React DOM Documentation",
+      },
+    ],
+    tools: [
+      {
+        name: "mcp",
+        description: "Searching React documentation",
+        status: "input-available",
+        parameters: {
+          query: "React hooks best practices",
+          source: "react.dev",
+        },
+        result: `{"query": "React hooks best practices","results": [{"title": "Rules of Hooks","url": "https://react.dev/warnings/invalid-hook-call-warning","snippet": "Hooks must be called at the top level of your React function components or custom hooks. Don't call hooks inside loops, conditions, or nested functions."},{"title": "useState Hook","url": "https://react.dev/reference/react/useState","snippet": "useState is a React Hook that lets you add state to your function components. It returns an array with two values: the current state and a function to update it."},{"title": "useEffect Hook","url": "https://react.dev/reference/react/useEffect","snippet": "useEffect lets you synchronize a component with external systems. It runs after render and can be used to perform side effects like data fetching."}]}`,
+        error: undefined,
+      },
+    ],
+    versions: [
+      {
+        id: nanoid(),
+        content: `# React Hooks Best Practices
+
+React hooks are a powerful feature that let you use state and other React features without writing classes. Here are some tips for using them effectively:
+
+## Rules of Hooks
+
+1. **Only call hooks at the top level** of your component or custom hooks
+2. **Don't call hooks inside loops, conditions, or nested functions**
+
+## Common Hooks
+
+- **useState**: For local component state
+- **useEffect**: For side effects like data fetching
+- **useContext**: For consuming context
+- **useReducer**: For complex state logic
+- **useCallback**: For memoizing functions
+- **useMemo**: For memoizing values
+
+## Example of useState and useEffect
+
+\`\`\`jsx
+function ProfilePage({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // This runs after render and when userId changes
+    fetchUser(userId).then(userData => {
+      setUser(userData);
+    });
+  }, [userId]);
+
+  return user ? <Profile user={user} /> : <Loading />;
+}
+\`\`\`
+
+Would you like me to explain any specific hook in more detail?`,
+      },
+    ],
+  },
+  {
+    key: nanoid(),
+    from: "user",
+    versions: [
+      {
+        id: nanoid(),
+        content:
+          "Yes, could you explain useCallback and useMemo in more detail? When should I use one over the other?",
+      },
+      {
+        id: nanoid(),
+        content:
+          "I'm particularly interested in understanding the performance implications of useCallback and useMemo. Could you break down when each is most appropriate?",
+      },
+      {
+        id: nanoid(),
+        content:
+          "Thanks for the overview! Could you dive deeper into the specific use cases where useCallback and useMemo make the biggest difference in React applications?",
+      },
+    ],
+  },
+  {
+    key: nanoid(),
+    from: "assistant",
+    reasoning: {
+      content: `The user is asking for a detailed explanation of useCallback and useMemo. I should provide a clear and concise explanation of each hook's purpose and how they differ.
+
+The useCallback hook is used to memoize functions to prevent unnecessary re-renders of child components that receive functions as props.
+
+The useMemo hook is used to memoize values to avoid expensive recalculations on every render.
+
+Both hooks help with performance optimization, but they serve different purposes.`,
+      duration: 10,
+    },
+    versions: [
+      {
+        id: nanoid(),
+        content: `## useCallback vs useMemo
+
+Both hooks help with performance optimization, but they serve different purposes:
+
+### useCallback
+
+\`useCallback\` memoizes **functions** to prevent unnecessary re-renders of child components that receive functions as props.
+
+\`\`\`jsx
+// Without useCallback - a new function is created on every render
+const handleClick = () => {
+  console.log(count);
+};
+
+// With useCallback - the function is only recreated when dependencies change
+const handleClick = useCallback(() => {
+  console.log(count);
+}, [count]);
+\`\`\`
+
+### useMemo
+
+\`useMemo\` memoizes **values** to avoid expensive recalculations on every render.
+
+\`\`\`jsx
+// Without useMemo - expensive calculation runs on every render
+const sortedList = expensiveSort(items);
+
+// With useMemo - calculation only runs when items change
+const sortedList = useMemo(() => expensiveSort(items), [items]);
+\`\`\`
+
+### When to use which?
+
+- Use **useCallback** when:
+  - Passing callbacks to optimized child components that rely on reference equality
+  - Working with event handlers that you pass to child components
+
+- Use **useMemo** when:
+  - You have computationally expensive calculations
+  - You want to avoid recreating objects that are used as dependencies for other hooks
+
+### Performance Note
+
+Don't overuse these hooks! They come with their own overhead. Only use them when you have identified a genuine performance issue.`,
+      },
+    ],
+  },
+];
+
+const models = [
+  {
+    id: "gpt-4o",
+    name: "GPT-4o",
+    chef: "OpenAI",
+    chefSlug: "openai",
+    providers: ["openai", "azure"],
+  },
+  {
+    id: "gpt-4o-mini",
+    name: "GPT-4o Mini",
+    chef: "OpenAI",
+    chefSlug: "openai",
+    providers: ["openai", "azure"],
+  },
+  {
+    id: "claude-opus-4-20250514",
+    name: "Claude 4 Opus",
+    chef: "Anthropic",
+    chefSlug: "anthropic",
+    providers: ["anthropic", "azure", "google", "amazon-bedrock"],
+  },
+  {
+    id: "claude-sonnet-4-20250514",
+    name: "Claude 4 Sonnet",
+    chef: "Anthropic",
+    chefSlug: "anthropic",
+    providers: ["anthropic", "azure", "google", "amazon-bedrock"],
+  },
+  {
+    id: "gemini-2.0-flash-exp",
+    name: "Gemini 2.0 Flash",
+    chef: "Google",
+    chefSlug: "google",
+    providers: ["google"],
+  },
+];
+
+const suggestions = [
+  "What are the latest trends in AI?",
+  "How does machine learning work?",
+  "Explain quantum computing",
+  "Best practices for React development",
+  "Tell me about TypeScript benefits",
+  "How to optimize database queries?",
+  "What is the difference between SQL and NoSQL?",
+  "Explain cloud computing basics",
+];
+
+const mockResponses = [
+  "That's a great question! Let me help you understand this concept better. The key thing to remember is that proper implementation requires careful consideration of the underlying principles and best practices in the field.",
+  "I'd be happy to explain this topic in detail. From my understanding, there are several important factors to consider when approaching this problem. Let me break it down step by step for you.",
+  "This is an interesting topic that comes up frequently. The solution typically involves understanding the core concepts and applying them in the right context. Here's what I recommend...",
+  "Great choice of topic! This is something that many developers encounter. The approach I'd suggest is to start with the fundamentals and then build up to more complex scenarios.",
+  "That's definitely worth exploring. From what I can see, the best way to handle this is to consider both the theoretical aspects and practical implementation details.",
+];
 
 export default function AgentPage() {
-  const [agentActive, setAgentActive] = useState(true)
-  const [autoRespond, setAutoRespond] = useState(true)
+  const [model, setModel] = useState<string>(models[0].id);
+  const [modelSelectorOpen, setModelSelectorOpen] = useState(false);
+  const [text, setText] = useState<string>("");
+  const [useWebSearch, setUseWebSearch] = useState<boolean>(false);
+  const [useMicrophone, setUseMicrophone] = useState<boolean>(false);
+  const [status, setStatus] = useState<
+    "submitted" | "streaming" | "ready" | "error"
+  >("ready");
+  const [messages, setMessages] = useState<MessageType[]>(initialMessages);
+  const [streamingMessageId, setStreamingMessageId] = useState<string | null>(
+    null
+  );
+
+  const selectedModelData = models.find((m) => m.id === model);
+
+  const streamResponse = useCallback(
+    async (messageId: string, content: string) => {
+      setStatus("streaming");
+      setStreamingMessageId(messageId);
+
+      const words = content.split(" ");
+      let currentContent = "";
+
+      for (let i = 0; i < words.length; i++) {
+        currentContent += (i > 0 ? " " : "") + words[i];
+
+        setMessages((prev) =>
+          prev.map((msg) => {
+            if (msg.versions.some((v) => v.id === messageId)) {
+              return {
+                ...msg,
+                versions: msg.versions.map((v) =>
+                  v.id === messageId ? { ...v, content: currentContent } : v
+                ),
+              };
+            }
+            return msg;
+          })
+        );
+
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.random() * 100 + 50)
+        );
+      }
+
+      setStatus("ready");
+      setStreamingMessageId(null);
+    },
+    []
+  );
+
+  const addUserMessage = useCallback(
+    (content: string) => {
+      const userMessage: MessageType = {
+        key: `user-${Date.now()}`,
+        from: "user",
+        versions: [
+          {
+            id: `user-${Date.now()}`,
+            content,
+          },
+        ],
+      };
+
+      setMessages((prev) => [...prev, userMessage]);
+
+      setTimeout(() => {
+        const assistantMessageId = `assistant-${Date.now()}`;
+        const randomResponse =
+          mockResponses[Math.floor(Math.random() * mockResponses.length)];
+
+        const assistantMessage: MessageType = {
+          key: `assistant-${Date.now()}`,
+          from: "assistant",
+          versions: [
+            {
+              id: assistantMessageId,
+              content: "",
+            },
+          ],
+        };
+
+        setMessages((prev) => [...prev, assistantMessage]);
+        streamResponse(assistantMessageId, randomResponse);
+      }, 500);
+    },
+    [streamResponse]
+  );
+
+  const handleSubmit = (message: PromptInputMessage) => {
+    const hasText = Boolean(message.text);
+    const hasAttachments = Boolean(message.files?.length);
+
+    if (!(hasText || hasAttachments)) {
+      return;
+    }
+
+    setStatus("submitted");
+
+    if (message.files?.length) {
+      toast.success("Files attached", {
+        description: `${message.files.length} file(s) attached to message`,
+      });
+    }
+
+    addUserMessage(message.text || "Sent with attachments");
+    setText("");
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setStatus("submitted");
+    addUserMessage(suggestion);
+  };
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Header */}
-      <header className="flex items-center justify-between border-b border-border px-6 py-4">
-        <div>
-          <h1 className="text-lg font-semibold">AI Agent Console</h1>
-          <p className="text-sm text-muted-foreground">Configure and monitor your LYO assistant</p>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className={`h-2 w-2 rounded-full ${agentActive ? "bg-green-400 animate-pulse" : "bg-muted"}`} />
-            <span className="text-sm">{agentActive ? "Active" : "Paused"}</span>
-          </div>
-          <Button
-            variant={agentActive ? "outline" : "default"}
-            className="gap-2"
-            onClick={() => setAgentActive(!agentActive)}
-          >
-            {agentActive ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-            {agentActive ? "Pause Agent" : "Start Agent"}
-          </Button>
-        </div>
-      </header>
-
-      <div className="flex-1 overflow-y-auto p-6">
-        <Tabs defaultValue="config" className="space-y-6">
-          <TabsList>
-            <TabsTrigger value="config" className="gap-2">
-              <Settings className="h-4 w-4" />
-              Configuration
-            </TabsTrigger>
-            <TabsTrigger value="prompts" className="gap-2">
-              <Code className="h-4 w-4" />
-              Prompts
-            </TabsTrigger>
-            <TabsTrigger value="activity" className="gap-2">
-              <History className="h-4 w-4" />
-              Activity Log
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="config" className="space-y-6">
-            <div className="grid gap-6 lg:grid-cols-3">
-              {/* Stats */}
-              <Card className="bg-card/50">
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-accent/20 flex items-center justify-center">
-                      <Zap className="h-6 w-6 text-accent" />
-                    </div>
+    <div className="relative flex size-full flex-col divide-y overflow-hidden">
+      <Conversation>
+        <ConversationContent>
+          {messages.map(({ versions, ...message }) => (
+            <MessageBranch defaultBranch={0} key={message.key}>
+              <MessageBranchContent>
+                {versions.map((version) => (
+                  <Message
+                    from={message.from}
+                    key={`${message.key}-${version.id}`}
+                  >
                     <div>
-                      <p className="text-2xl font-semibold">1,284</p>
-                      <p className="text-sm text-muted-foreground">Auto-replies today</p>
+                      {message.sources?.length && (
+                        <Sources>
+                          <SourcesTrigger count={message.sources.length} />
+                          <SourcesContent>
+                            {message.sources.map((source) => (
+                              <Source
+                                href={source.href}
+                                key={source.href}
+                                title={source.title}
+                              />
+                            ))}
+                          </SourcesContent>
+                        </Sources>
+                      )}
+                      {message.reasoning && (
+                        <Reasoning duration={message.reasoning.duration}>
+                          <ReasoningTrigger />
+                          <ReasoningContent>
+                            {message.reasoning.content}
+                          </ReasoningContent>
+                        </Reasoning>
+                      )}
+                      <MessageContent>
+                        <MessageResponse>{version.content}</MessageResponse>
+                      </MessageContent>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-card/50">
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-green-400/20 flex items-center justify-center">
-                      <MessageSquare className="h-6 w-6 text-green-400" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-semibold">89%</p>
-                      <p className="text-sm text-muted-foreground">Response accuracy</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-card/50">
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-yellow-400/20 flex items-center justify-center">
-                      <Brain className="h-6 w-6 text-yellow-400" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-semibold">2.3s</p>
-                      <p className="text-sm text-muted-foreground">Avg response time</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="grid gap-6 lg:grid-cols-2">
-              {/* Agent Settings */}
-              <Card className="bg-card/50">
-                <CardHeader>
-                  <CardTitle className="text-base">Agent Behavior</CardTitle>
-                  <CardDescription>Configure how LYO responds to messages</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-0.5">
-                      <Label>Auto-respond to messages</Label>
-                      <p className="text-xs text-muted-foreground">Let LYO automatically reply to incoming messages</p>
-                    </div>
-                    <Switch checked={autoRespond} onCheckedChange={setAutoRespond} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-0.5">
-                      <Label>Schedule meetings automatically</Label>
-                      <p className="text-xs text-muted-foreground">Create calendar events from message context</p>
-                    </div>
-                    <Switch defaultChecked />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-0.5">
-                      <Label>Use contact memory</Label>
-                      <p className="text-xs text-muted-foreground">Include context from previous interactions</p>
-                    </div>
-                    <Switch defaultChecked />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-0.5">
-                      <Label>Require approval for sensitive topics</Label>
-                      <p className="text-xs text-muted-foreground">Ask before sending pricing or contract details</p>
-                    </div>
-                    <Switch defaultChecked />
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Tone Settings */}
-              <Card className="bg-card/50">
-                <CardHeader>
-                  <CardTitle className="text-base">Tone & Personality</CardTitle>
-                  <CardDescription>Customize how LYO communicates</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <Label>Communication Style</Label>
-                    <Select defaultValue="professional">
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="professional">Professional</SelectItem>
-                        <SelectItem value="friendly">Friendly</SelectItem>
-                        <SelectItem value="casual">Casual</SelectItem>
-                        <SelectItem value="formal">Formal</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Response Length</Label>
-                    <Select defaultValue="balanced">
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="concise">Concise</SelectItem>
-                        <SelectItem value="balanced">Balanced</SelectItem>
-                        <SelectItem value="detailed">Detailed</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Language</Label>
-                    <Select defaultValue="en">
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="en">English</SelectItem>
-                        <SelectItem value="es">Spanish</SelectItem>
-                        <SelectItem value="fr">French</SelectItem>
-                        <SelectItem value="de">German</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Agent Name</Label>
-                    <Input defaultValue="LYO Assistant" />
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="prompts" className="space-y-6">
-            <Card className="bg-card/50">
-              <CardHeader>
-                <CardTitle className="text-base">System Prompt</CardTitle>
-                <CardDescription>The core instructions that define your agent&apos;s behavior</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Textarea
-                  className="min-h-[200px] font-mono text-sm bg-secondary/50"
-                  defaultValue={`You are LYO, a professional AI assistant helping manage communications. 
-
-Key behaviors:
-- Always be polite and professional
-- Use context from previous interactions when available
-- Schedule meetings proactively when discussed
-- Never share sensitive information without approval
-- Match the tone of the conversation partner
-
-When responding:
-1. Acknowledge the message
-2. Provide helpful information
-3. Suggest next steps if appropriate`}
-                />
-                <div className="flex justify-end gap-2 mt-4">
-                  <Button variant="outline" className="gap-2 bg-transparent">
-                    <RefreshCw className="h-4 w-4" />
-                    Reset to Default
-                  </Button>
-                  <Button>Save Changes</Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-card/50">
-              <CardHeader>
-                <CardTitle className="text-base">Custom Rules</CardTitle>
-                <CardDescription>Additional rules for specific scenarios</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {[
-                  { rule: "When asked about pricing, always offer to schedule a call first", active: true },
-                  { rule: "Include signature with contact details on first email", active: true },
-                  { rule: "Escalate urgent requests to manual review", active: true },
-                  { rule: "Use Spanish when contact prefers it", active: false },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center justify-between rounded-lg border border-border p-3">
-                    <span className="text-sm">{item.rule}</span>
-                    <Switch defaultChecked={item.active} />
-                  </div>
+                  </Message>
                 ))}
-                <Button variant="outline" className="w-full bg-transparent">
-                  Add New Rule
-                </Button>
-              </CardContent>
-            </Card>
-          </TabsContent>
+              </MessageBranchContent>
+              {versions.length > 1 && (
+                <MessageBranchSelector from={message.from}>
+                  <MessageBranchPrevious />
+                  <MessageBranchPage />
+                  <MessageBranchNext />
+                </MessageBranchSelector>
+              )}
+            </MessageBranch>
+          ))}
+        </ConversationContent>
+        <ConversationScrollButton />
+      </Conversation>
 
-          <TabsContent value="activity" className="space-y-6">
-            <Card className="bg-card/50">
-              <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle className="text-base">Recent Activity</CardTitle>
-                  <CardDescription>Monitor your agent&apos;s actions in real-time</CardDescription>
-                </div>
-                <Button variant="outline" size="sm" className="gap-2 bg-transparent">
-                  <RefreshCw className="h-4 w-4" />
-                  Refresh
-                </Button>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {[
-                    { action: "Auto-replied to Sarah Chen", channel: "WhatsApp", time: "2 min ago", status: "success" },
-                    {
-                      action: "Scheduled meeting with Michael Roberts",
-                      channel: "Calendar",
-                      time: "5 min ago",
-                      status: "success",
-                    },
-                    {
-                      action: "Waiting for approval - pricing inquiry",
-                      channel: "Gmail",
-                      time: "10 min ago",
-                      status: "pending",
-                    },
-                    {
-                      action: "Added memory for Emma Wilson",
-                      channel: "System",
-                      time: "15 min ago",
-                      status: "success",
-                    },
-                    {
-                      action: "Auto-replied to David Park",
-                      channel: "Instagram",
-                      time: "20 min ago",
-                      status: "success",
-                    },
-                  ].map((activity, index) => (
-                    <div key={index} className="flex items-center justify-between rounded-lg border border-border p-3">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`h-2 w-2 rounded-full ${activity.status === "success" ? "bg-green-400" : "bg-yellow-400"}`}
+      <div className="grid shrink-0 gap-4 pt-4">
+        <Suggestions className="px-4">
+          {suggestions.map((suggestion) => (
+            <Suggestion
+              key={suggestion}
+              onClick={() => handleSuggestionClick(suggestion)}
+              suggestion={suggestion}
+            />
+          ))}
+        </Suggestions>
+
+        <div className="w-full px-4 pb-4">
+          <PromptInput globalDrop multiple onSubmit={handleSubmit}>
+            <PromptInputHeader>
+              <PromptInputAttachments>
+                {(attachment) => <PromptInputAttachment data={attachment} />}
+              </PromptInputAttachments>
+            </PromptInputHeader>
+
+            <PromptInputBody>
+              <PromptInputTextarea
+                onChange={(event) => setText(event.target.value)}
+                value={text}
+              />
+            </PromptInputBody>
+
+            <PromptInputFooter>
+              <PromptInputTools>
+                <PromptInputActionMenu>
+                  <PromptInputActionMenuTrigger />
+                  <PromptInputActionMenuContent>
+                    <PromptInputActionAddAttachments />
+                  </PromptInputActionMenuContent>
+                </PromptInputActionMenu>
+
+                <PromptInputButton
+                  onClick={() => setUseMicrophone(!useMicrophone)}
+                  variant={useMicrophone ? "default" : "ghost"}
+                >
+                  <MicIcon size={16} />
+                  <span className="sr-only">Microphone</span>
+                </PromptInputButton>
+
+                <PromptInputButton
+                  onClick={() => setUseWebSearch(!useWebSearch)}
+                  variant={useWebSearch ? "default" : "ghost"}
+                >
+                  <GlobeIcon size={16} />
+                  <span>Search</span>
+                </PromptInputButton>
+
+                <ModelSelector
+                  onOpenChange={setModelSelectorOpen}
+                  open={modelSelectorOpen}
+                >
+                  <ModelSelectorTrigger asChild>
+                    <PromptInputButton>
+                      {selectedModelData?.chefSlug && (
+                        <ModelSelectorLogo
+                          provider={selectedModelData.chefSlug}
                         />
-                        <div>
-                          <p className="text-sm font-medium">{activity.action}</p>
-                          <p className="text-xs text-muted-foreground">{activity.channel}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant={activity.status === "success" ? "secondary" : "outline"}>
-                          {activity.status}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">{activity.time}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+                      )}
+                      {selectedModelData?.name && (
+                        <ModelSelectorName>
+                          {selectedModelData.name}
+                        </ModelSelectorName>
+                      )}
+                    </PromptInputButton>
+                  </ModelSelectorTrigger>
+                  <ModelSelectorContent>
+                    <ModelSelectorInput placeholder="Search models..." />
+                    <ModelSelectorList>
+                      <ModelSelectorEmpty>No models found.</ModelSelectorEmpty>
+                      {["OpenAI", "Anthropic", "Google"].map((chef) => (
+                        <ModelSelectorGroup key={chef} heading={chef}>
+                          {models
+                            .filter((m) => m.chef === chef)
+                            .map((m) => (
+                              <ModelSelectorItem
+                                key={m.id}
+                                onSelect={() => {
+                                  setModel(m.id);
+                                  setModelSelectorOpen(false);
+                                }}
+                                value={m.id}
+                              >
+                                <ModelSelectorLogo provider={m.chefSlug} />
+                                <ModelSelectorName>{m.name}</ModelSelectorName>
+                                <ModelSelectorLogoGroup>
+                                  {m.providers.map((provider) => (
+                                    <ModelSelectorLogo
+                                      key={provider}
+                                      provider={provider}
+                                    />
+                                  ))}
+                                </ModelSelectorLogoGroup>
+                                {model === m.id ? (
+                                  <CheckIcon className="ml-auto size-4" />
+                                ) : (
+                                  <div className="ml-auto size-4" />
+                                )}
+                              </ModelSelectorItem>
+                            ))}
+                        </ModelSelectorGroup>
+                      ))}
+                    </ModelSelectorList>
+                  </ModelSelectorContent>
+                </ModelSelector>
+              </PromptInputTools>
+
+              <PromptInputSubmit
+                disabled={
+                  !(text.trim() || status) || status === "streaming"
+                }
+                status={status}
+              />
+            </PromptInputFooter>
+          </PromptInput>
+        </div>
       </div>
     </div>
-  )
+  );
 }
