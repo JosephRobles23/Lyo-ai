@@ -63,7 +63,6 @@ export function Header() {
           <div className="hidden md:flex items-center gap-3">
             <ThemeSwitch />
             <LanguageSwitcher />
-<<<<<<< HEAD
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -116,16 +115,6 @@ export function Header() {
                 </Button>
               </>
             )}
-=======
-            <Button variant="ghost" className="text-sm text-gray-700 dark:text-gray-300" asChild>
-              <Link href="/login">{t('nav.login')}</Link>
-            </Button>
-            <Button className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 rounded-full px-5" asChild>
-              <Link href="/login">
-                {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
->>>>>>> 2721c1ec1d3ae0fad3a32ac811d48a964f69f4d3
           </div>
 
           {/* Mobile menu button */}
@@ -153,72 +142,64 @@ export function Header() {
                 <ThemeSwitch />
                 <LanguageSwitcher />
               </div>
-<<<<<<< HEAD
-              {user ? (
-                <>
-                  <div className="flex items-center gap-3 px-4 py-2">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={user.avatar_url || ""} />
-                      <AvatarFallback>{getUserInitials()}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">{user.name}</p>
-                      <p className="text-xs text-gray-500">{user.email}</p>
+              {
+                user ? (
+                  <>
+                    <div className="flex items-center gap-3 px-4 py-2">
+                      <Avatar className="h-10 w-10">
+                        <AvatarImage src={user.avatar_url || ""} />
+                        <AvatarFallback>{getUserInitials()}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">{user.name}</p>
+                        <p className="text-xs text-gray-500">{user.email}</p>
+                      </div>
                     </div>
-                  </div>
-                  <Button variant="ghost" className="w-full justify-center" asChild>
-                    <Link href="/dashboard">
-                      <LayoutDashboard className="mr-2 h-4 w-4" />
-                      Dashboard
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" className="w-full justify-center" asChild>
-                    <Link href="/dashboard/settings">
-                      <Settings className="mr-2 h-4 w-4" />
-                      Settings
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-center text-destructive"
-                    onClick={async () => {
-                      try {
-                        await signOut()
-                      } catch (error) {
-                        console.error("Error signing out:", error)
-                      }
-                    }}
-                  >
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Log out
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button variant="ghost" className="w-full justify-center" asChild>
-                    <Link href="/login">{t('nav.login')}</Link>
-                  </Button>
-                  <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 rounded-full" asChild>
-                    <Link href="/login">
-                      {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </>
-              )}
-=======
-              <Button variant="ghost" className="w-full justify-center text-gray-700 dark:text-gray-300" asChild>
-                <Link href="/login">{t('nav.login')}</Link>
-              </Button>
-              <Button className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 rounded-full" asChild>
-                <Link href="/login">
-                  {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
->>>>>>> 2721c1ec1d3ae0fad3a32ac811d48a964f69f4d3
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
+                    <Button variant="ghost" className="w-full justify-center" asChild>
+                      <Link href="/dashboard">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        Dashboard
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" className="w-full justify-center" asChild>
+                      <Link href="/dashboard/settings">
+                        <Settings className="mr-2 h-4 w-4" />
+                        Settings
+                      </Link>
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-center text-destructive"
+                      onClick={async () => {
+                        try {
+                          await signOut()
+                        } catch (error) {
+                          console.error("Error signing out:", error)
+                        }
+                      }}
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Log out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="ghost" className="w-full justify-center" asChild>
+                      <Link href="/login">{t('nav.login')}</Link>
+                    </Button>
+                    <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 rounded-full" asChild>
+                      <Link href="/login">
+                        {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </>
+                )
+              }
+            </div >
+          </nav >
+        </div >
+      )
+      }
+    </header >
   )
 }

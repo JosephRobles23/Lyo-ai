@@ -1,26 +1,19 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-<<<<<<< HEAD
 import { Bell, Plus, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useAuth } from "@/lib/auth-context"
-=======
-import { Bell, Plus } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
->>>>>>> 2721c1ec1d3ae0fad3a32ac811d48a964f69f4d3
+import { ThemeToggle } from "../theme-toggle"
 
 export function DashboardHeader() {
   const currentHour = new Date().getHours()
   const greeting = currentHour < 12 ? "Good morning" : currentHour < 18 ? "Good afternoon" : "Good evening"
-<<<<<<< HEAD
   const { theme, setTheme } = useTheme()
   const { user } = useAuth()
 
   // Get first name from full name
   const firstName = user?.name?.split(" ")[0] || "User"
-=======
->>>>>>> 2721c1ec1d3ae0fad3a32ac811d48a964f69f4d3
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-border px-6">
