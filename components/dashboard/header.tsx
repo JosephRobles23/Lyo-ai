@@ -33,10 +33,10 @@ export function DashboardHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background px-10">
-      <div>
-        <h1 className="text-lg font-semibold">{greeting}, {firstName}</h1>
-        <p className="text-sm text-muted-foreground">Here&apos;s what&apos;s happening today</p>
+    <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-border bg-background px-4 md:px-10">
+      <div className="min-w-0 flex-1 mr-4">
+        <h1 className="text-base md:text-lg font-semibold truncate">{greeting}, {firstName}</h1>
+        <p className="text-xs md:text-sm text-muted-foreground truncate">Here&apos;s what&apos;s happening today</p>
       </div>
       <div className="flex items-center gap-2">
         <ThemeToggle />

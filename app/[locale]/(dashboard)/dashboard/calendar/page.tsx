@@ -57,7 +57,7 @@ export default function CalendarPage() {
               {weekDays.map((day, index) => (
                 <div key={day} className="p-4 text-center border-l border-border">
                   <p className="text-xs text-muted-foreground">{day}</p>
-                  <p className={`text-lg font-semibold mt-1 ${index === 3 ? "text-accent" : ""}`}>{25 + index}</p>
+                  <p className={`text-sm font-semibold mt-1 ${index === 3 ? "text-accent" : ""}`}>{25 + index}</p>
                 </div>
               ))}
             </div>
