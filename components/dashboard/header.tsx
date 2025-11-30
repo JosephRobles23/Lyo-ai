@@ -1,18 +1,26 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+<<<<<<< HEAD
 import { Bell, Plus, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useAuth } from "@/lib/auth-context"
+=======
+import { Bell, Plus } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
+>>>>>>> 2721c1ec1d3ae0fad3a32ac811d48a964f69f4d3
 
 export function DashboardHeader() {
   const currentHour = new Date().getHours()
   const greeting = currentHour < 12 ? "Good morning" : currentHour < 18 ? "Good afternoon" : "Good evening"
+<<<<<<< HEAD
   const { theme, setTheme } = useTheme()
   const { user } = useAuth()
 
   // Get first name from full name
   const firstName = user?.name?.split(" ")[0] || "User"
+=======
+>>>>>>> 2721c1ec1d3ae0fad3a32ac811d48a964f69f4d3
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-border px-6">
@@ -21,15 +29,7 @@ export function DashboardHeader() {
         <p className="text-sm text-muted-foreground">Here&apos;s what&apos;s happening today</p>
       </div>
       <div className="flex items-center gap-2">
-        <Button 
-          variant="ghost" 
-          size="icon"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
-          <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
+        <ThemeToggle />
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
           <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-accent" />

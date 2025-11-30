@@ -26,9 +26,92 @@
   "landing": {
     "hero": {
       "title": "One inbox, every conversation",
-      "subtitle": "Lyo brings together all your messages, emails, and contacts. It intelligently learns your goals, understands what matters most, and drafts replies that sound like you.",
-      "cta": "Get Started",
-      "secondaryCta": "Learn More"
+      "subtitle": "Kinso brings together all your messages, emails, and contacts. It intelligently learns your goals, understands what matters most, and drafts replies that sound like you.",
+      "waitlist": "Join",
+      "waitlistOthers": "others on the waitlist.",
+      "joinNow": "Join now"
+    },
+    "integrations": {
+      "title": "INTEGRATIONS"
+    },
+    "draftResponse": {
+      "label": "DRAFT RESPONSE",
+      "title": "Respond faster with auto-drafted replies.",
+      "description1": "By learning how you communicate with different people across different platforms, young drafts replies matching your voice and tone.",
+      "description2": "Each reply is crafted with the context of your recent discussions and meetings."
+    },
+    "universalSearch": {
+      "label": "UNIVERSAL SEARCH",
+      "title": "Search across all your conversations.",
+      "description1": "Find anything you've ever sent or received without knowing the exact words that were used.",
+      "description2": "Instead of crawling through multiple emails and messaging platforms, just ask Kinso's universal search bar."
+    },
+    "contextualAssistant": {
+      "label": "CONTEXTUAL ASSISTANT",
+      "title": "See conversations that connect themselves.",
+      "description1": "Lyo connects what belongs together. Contract sent on WhatsApp? Lyo will surface the email requesting it. Meeting details scattered across Slack and email?",
+      "description2": "Now they're in one place, before you even ask for it."
+    },
+    "about": {
+      "title": "Lyo brings together all of your conversations, which uses AI to understand your goals and lets you focus on the most important messages and contacts.",
+      "description": "Whether you're circling back over email, digging for opportunities on LinkedIn, or buried under messages on Slack, business communications happens on too many platforms.",
+      "featuresLabel": "FEATURES"
+    },
+    "morningBriefing": {
+      "title": "Start every day knowing",
+      "titleHighlight": "what matters.",
+      "description": "Kinso serves you a morning briefing that summarises crucial messages and action items. Whether it's the urgent client request or time-sensitive approval, you'll see it in order of what needs your attention first.",
+      "goodMorning": "Good Morning,",
+      "newConversations": "You've got",
+      "new": "new",
+      "and": "and",
+      "active": "active",
+      "conversations": "conversations.",
+      "todaysBriefing": "Today's briefing",
+      "searchPlaceholder": "Start typing to ask or search Kinso"
+    },
+    "faq": {
+      "label": "FAQs",
+      "title": "Frequently Asked Questions",
+      "description": "Everything you need to know about using Lyo, from setup to security. Still curious? Drop us a message and we'll get right back to you.",
+      "questions": {
+        "q1": {
+          "question": "How is Lyo different from a normal inbox?",
+          "answer": "Lyo unifies all your communication platforms into one intelligent inbox. Unlike traditional email clients, it uses AI to understand context, prioritize messages, and draft responses that match your voice."
+        },
+        "q2": {
+          "question": "How do Auto-Drafted Replies work?",
+          "answer": "Lyo learns how you communicate with different people and across different platforms. When you receive a message, it automatically drafts a response matching your voice and tone, incorporating context from your recent discussions."
+        },
+        "q3": {
+          "question": "Can you still message outside of Lyo on connected accounts?",
+          "answer": "Yes! Lyo works alongside your existing apps. You can continue using Gmail, Slack, WhatsApp, and other platforms normally. Lyo simply provides a unified view and AI assistance."
+        },
+        "q4": {
+          "question": "How does Lyo learn my goals and priorities?",
+          "answer": "Lyo analyzes your communication patterns, response times, and interaction frequency to understand what matters most to you. Over time, it gets better at surfacing important messages and tasks."
+        },
+        "q5": {
+          "question": "Is my data private and secure?",
+          "answer": "Absolutely. Lyo uses enterprise-grade encryption and never shares your data with third parties. Your communications remain private, and you have full control over what Lyo can access."
+        },
+        "q6": {
+          "question": "What happens when I join the waitlist?",
+          "answer": "You'll receive early access to Lyo as we roll out to new users. We'll send you updates on our progress and let you know when it's your turn to experience the unified inbox."
+        }
+      }
+    },
+    "footer": {
+      "description": "One intelligent inbox for all your messages, emails and contacts.",
+      "product": "Product",
+      "legal": "Legal",
+      "about": "About",
+      "termsOfUse": "Terms of Use",
+      "privacyPolicy": "Privacy Policy",
+      "meetTheTeam": "Meet the Team",
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "youtube": "Youtube"
     }
   },
   "dashboard": {

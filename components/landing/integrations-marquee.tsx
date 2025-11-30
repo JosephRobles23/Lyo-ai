@@ -11,12 +11,16 @@ const integrations = [
   { name: "Instagram", icon: "instagram" },
 ]
 
+import { useTranslations } from "next-intl"
+
 export function IntegrationsMarquee() {
+  const t = useTranslations()
+  
   return (
-    <section className="py-12 overflow-hidden bg-white">
+    <section className="py-12 overflow-hidden bg-white dark:bg-gray-900">
       <div className="text-center mb-8">
-        <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-200 text-sm text-gray-600">
-          INTEGRATIONS
+        <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-200 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300">
+          {t('landing.integrations.title')}
         </span>
       </div>
 

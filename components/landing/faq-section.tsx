@@ -3,42 +3,38 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Plus, Minus } from "lucide-react"
-
-const faqs = [
-  {
-    question: "How is Lyo different from a normal inbox?",
-    answer:
-      "Lyo unifies all your communication platforms into one intelligent inbox. Unlike traditional email clients, it uses AI to understand context, prioritize messages, and draft responses that match your voice.",
-  },
-  {
-    question: "How do Auto-Drafted Replies work?",
-    answer:
-      "Lyo learns how you communicate with different people and across different platforms. When you receive a message, it automatically drafts a response matching your voice and tone, incorporating context from your recent discussions.",
-  },
-  {
-    question: "Can you still message outside of Lyo on connected accounts?",
-    answer:
-      "Yes! Lyo works alongside your existing apps. You can continue using Gmail, Slack, WhatsApp, and other platforms normally. Lyo simply provides a unified view and AI assistance.",
-  },
-  {
-    question: "How does Lyo learn my goals and priorities?",
-    answer:
-      "Lyo analyzes your communication patterns, response times, and interaction frequency to understand what matters most to you. Over time, it gets better at surfacing important messages and tasks.",
-  },
-  {
-    question: "Is my data private and secure?",
-    answer:
-      "Absolutely. Lyo uses enterprise-grade encryption and never shares your data with third parties. Your communications remain private, and you have full control over what Lyo can access.",
-  },
-  {
-    question: "What happens when I join the waitlist?",
-    answer:
-      "You'll receive early access to Lyo as we roll out to new users. We'll send you updates on our progress and let you know when it's your turn to experience the unified inbox.",
-  },
-]
+import { useTranslations } from "next-intl"
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const t = useTranslations()
+  
+  const faqs = [
+    {
+      question: t('landing.faq.questions.q1.question'),
+      answer: t('landing.faq.questions.q1.answer'),
+    },
+    {
+      question: t('landing.faq.questions.q2.question'),
+      answer: t('landing.faq.questions.q2.answer'),
+    },
+    {
+      question: t('landing.faq.questions.q3.question'),
+      answer: t('landing.faq.questions.q3.answer'),
+    },
+    {
+      question: t('landing.faq.questions.q4.question'),
+      answer: t('landing.faq.questions.q4.answer'),
+    },
+    {
+      question: t('landing.faq.questions.q5.question'),
+      answer: t('landing.faq.questions.q5.answer'),
+    },
+    {
+      question: t('landing.faq.questions.q6.question'),
+      answer: t('landing.faq.questions.q6.answer'),
+    },
+  ]
 
   return (
     <section id="faqs" className="py-24 bg-[#0f0f0f] relative overflow-hidden">
@@ -56,14 +52,13 @@ export function FaqSection() {
         {/* Section label */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-gray-700 text-sm text-gray-400">
-            FAQs
+            {t('landing.faq.label')}
           </span>
         </div>
 
-        <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-4">Frequently Asked Questions</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-4">{t('landing.faq.title')}</h2>
         <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-          Everything you need to know about using Lyo, from setup to security. Still curious? Drop us a message and
-          we'll get right back to you.
+          {t('landing.faq.description')}
         </p>
 
         <div className="space-y-4">
