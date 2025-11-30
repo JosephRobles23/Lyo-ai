@@ -36,11 +36,11 @@ export function Header() {
   }
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
-      <div className="w-full mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-5xl">
+    <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 transition-all duration-300">
+      <div className="w-full mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo - Siempre visible */}
-          <Link href="/" className="flex items-center flex-shrink-0 z-10">
+          <Link href="/" className="flex items-center flex-shrink-0 z-10 transition-transform hover:scale-105 duration-300">
             <Image
               src="/logo-lyo.webp"
               alt="Lyo"
@@ -51,27 +51,34 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation - Solo visible en pantallas grandes */}
-          <nav className="hidden md:flex items-center gap-4 lg:gap-6 absolute right-1/2 transform -translate-x-1/3 ">
-            <Link href="#about" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors whitespace-nowrap">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 absolute left-1/2 -translate-x-1/2">
+            <Link href="#about" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300 whitespace-nowrap relative group">
               {t('nav.about')}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-teal-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <Link href="#features" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors whitespace-nowrap">
+            <Link href="#features" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300 whitespace-nowrap relative group">
               {t('nav.features')}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-teal-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <Link href="#faqs" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors whitespace-nowrap">
+            <Link href="#faqs" className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300 whitespace-nowrap relative group">
               {t('nav.faqs')}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-teal-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
           </nav>
 
           {/* Desktop CTA - Solo visible en pantallas grandes */}
           <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
-            <ThemeSwitch />
-            <LanguageSwitcher />
+            <div className="transition-transform hover:scale-110 duration-300">
+              <ThemeSwitch />
+            </div>
+            <div className="transition-transform hover:scale-110 duration-300">
+              <LanguageSwitcher />
+            </div>
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-2 px-2">
-                    <Avatar className="h-8 w-8">
+                  <Button variant="ghost" className="gap-2 px-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <Avatar className="h-8 w-8 ring-2 ring-transparent hover:ring-orange-400 transition-all duration-300">
                       <AvatarImage src={user.avatar_url || ""} />
                       <AvatarFallback>{getUserInitials()}</AvatarFallback>
                     </Avatar>
@@ -109,12 +116,12 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" className="text-sm hidden lg:inline-flex" asChild>
+                <Button variant="ghost" className="text-sm hidden lg:inline-flex transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800" asChild>
                   <Link href="/login">{t('nav.login')}</Link>
                 </Button>
-                <Button className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 rounded-full px-4 lg:px-5 text-sm" asChild>
+                <Button className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 rounded-full px-4 lg:px-5 text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95" asChild>
                   <Link href="/login">
-                    {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4" />
+                    {t('nav.getStarted')} <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
               </>
